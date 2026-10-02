@@ -1,0 +1,38 @@
+{
+  "name": "saucedemo-playwright-cucumber",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Suite de pruebas E2E para Sauce Demo con Playwright, Cucumber y TypeScript",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "cross-env NODE_OPTIONS=--disable-warning=ExperimentalWarning cucumber-js",
+    "test:smoke": "cross-env NODE_OPTIONS=--disable-warning=ExperimentalWarning cucumber-js --tags @smoke",
+    "test:headed": "cross-env NODE_OPTIONS=--disable-warning=ExperimentalWarning HEADLESS=false SLOW_MO=500 cucumber-js",
+    "test:parallel": "cross-env NODE_OPTIONS=--disable-warning=ExperimentalWarning cucumber-js --parallel 4",
+    "test:firefox": "cross-env NODE_OPTIONS=--disable-warning=ExperimentalWarning BROWSER=firefox cucumber-js",
+    "test:webkit": "cross-env NODE_OPTIONS=--disable-warning=ExperimentalWarning BROWSER=webkit cucumber-js",
+    "test:trace": "cross-env NODE_OPTIONS=--disable-warning=ExperimentalWarning TRACE=on cucumber-js",
+    "snippets": "cross-env NODE_OPTIONS=--disable-warning=ExperimentalWarning cucumber-js --dry-run --format snippets",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^13.2.1",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^22.0.0",
+    "cross-env": "^10.1.0",
+    "dotenv": "^18.0.5",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.9",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.71.0"
+  }
+}
