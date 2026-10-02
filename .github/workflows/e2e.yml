@@ -1,0 +1,43 @@
+name: E2E Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Instalar Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Lint, formato y tipos
+        run: |
+          npm run lint
+          npm run format:check
+          npm run typecheck
+
+      - name: Ejecutar pruebas
+        run: npm test
+
+      - name: Publicar reporte y traces
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: cucumber-report
+          path: reports/
+          retention-days: 14
